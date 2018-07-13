@@ -4,6 +4,7 @@
 #include "crypto/rand.h"
 
 int main() {
-    printf("Hello %i \n", 5);
+    unsigned int rand = rand_uint(20);
+    printf("Hello %i \n", rand);
 }
 

@@ -2,11 +2,16 @@ cmake_minimum_required(VERSION 3.8)
 project(pass)
 
 include_directories(include)
-include_directories(/usr/local/Cellar/openssl/1.0.2o_1/include)
 
-file(GLOB SOURCES "src/*.c")
+file(GLOB SOURCES "src/*.c" "src/crypto/*.c")
+
+find_package(OpenSSL REQUIRED)
+if(OPENSSL_FOUND)
+    set(OPENSSL_USE_STATIC_LIBS TRUE)
+endif()
 
 add_executable(pass ${SOURCES})
+target_link_libraries(pass OpenSSL::Crypto)
 
 if(APPLE)
 	install(TARGETS pass DESTINATION /usr/local/bin)

@@ -1,6 +1,9 @@
-#ifndef CRYPTO_RAND_H_
-#define CRYPTO_RAND_H_
+#ifndef _CRYPTO_RAND
+#define _CRYPTO_RAND
+
+unsigned int rand_uint();
 
 int gen_rand();
 
-#endif // CRYPTO_RAND_H_
+#endif // _CRYPTO_RAND
+
