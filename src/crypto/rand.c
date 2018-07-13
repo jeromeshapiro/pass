@@ -2,7 +2,9 @@
 #include <openssl/rand.h>
 #include "rand.h"
 
-unsigned int rand_uint(unsigned int limit) {
+unsigned int rand_uint(unsigned int min, unsigned int max) {
+    unsigned int offset = max - min;
+
     union {
         unsigned int i;
         unsigned char c[sizeof(unsigned int)];
@@ -13,11 +15,8 @@ unsigned int rand_uint(unsigned int limit) {
             fprintf(stderr, "Can't get random bytes!\n");
             exit(1);
         }
-    } while (u.i < (-limit % limit)); /* u.i < (2**size % limit) */
-    return u.i % limit;
-}
+    } while (u.i < (-offset % offset));
 
-int gen_rand() {
-    return 10;
+    return (u.i % offset) + min;
 }
 
