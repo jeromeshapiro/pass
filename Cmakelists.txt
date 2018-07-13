@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.8)
+project(pass)
+
+include_directories(include)
+include_directories(/usr/local/Cellar/openssl/1.0.2o_1/include)
+
+file(GLOB SOURCES "src/*.c")
+
+add_executable(pass ${SOURCES})
+
+if(APPLE)
+	install(TARGETS pass DESTINATION /usr/local/bin)
+elseif(UNIX)
+	install(TARGETS pass DESTINATION /usr/bin)
+endif()
+
