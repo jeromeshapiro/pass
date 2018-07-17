@@ -3,7 +3,12 @@ project(pass)
 
 include_directories(include)
 
-file(GLOB SOURCES "src/*.c" "src/crypto/*.c")
+file(GLOB SOURCES
+	"src/*.c"
+	"src/cli/*.c"
+	"src/crypto/*.c"
+	"src/storage/*.c"
+)
 
 find_package(OpenSSL REQUIRED)
 if(OPENSSL_FOUND)
