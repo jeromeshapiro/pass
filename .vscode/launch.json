@@ -5,7 +5,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "C++ Launch",
+			"name": "Launch",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceRoot}/build/pass",
@@ -19,7 +19,7 @@
 			"showDisplayString": false,
 			"args": [],
 			"stopAtEntry": false,
-			"cwd": "${workspaceRoot}/src",
+			"cwd": "${workspaceRoot}",
 			"environment": [],
 			"externalConsole": false,
 			"osx": {
