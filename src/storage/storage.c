@@ -20,10 +20,7 @@ void initialize_storage() {
 
 	const int dir_status = stat(config_path, &st);
 
-	printf("%i\n", dir_status);
-
 	if (dir_status == -1) {
-		printf("creating dir: %s\n", config_path);
 		mkdir(config_path, 0700);
 	}
 

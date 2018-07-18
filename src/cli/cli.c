@@ -10,19 +10,17 @@
 #define USER 243105106
 #define PASSWORD 2113929183
 
-static const char *help = "Passphrase - CLI password manager\n"
-"\nUsage:\n"
-"    pass ls\n"
-"    pass cp <key>\n"
-"    pass print <key>\n"
-"    pass create (--phrase | --random) <key>\n"
-"    pass update (user | password <key>)\n"
-"    pass rm <key>\n"
-"    pass -h | --help\n"
-"    pass -v | --version\n"
+static const char *help =
+"Usage: pass <command>\n"
+"    ls                 List all passphrase keys\n"
+"    cp                 Copy a passphrase to the clipboard\n"
+"    print              Print a passphrase to stdout\n"
+"    create             Create a new passphrase\n"
+"    update             Update an existing passphrase\n"
+"    rm                 Delete a passphrase\n"
 "\nOptions:\n"
-"    -h --help        Show this screen.\n"
-"    -v --version     Show verion.\n"
+"    -h, --help         Show this screen.\n"
+"    -v, --version      Show verion.\n"
 "\n";
 
 static const int _hash(char const *input) { 

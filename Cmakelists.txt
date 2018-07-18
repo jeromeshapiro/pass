@@ -1,26 +1,28 @@
 cmake_minimum_required(VERSION 3.8)
 project(pass)
-
 include_directories(include)
 
-file(GLOB SOURCES
-	"src/*.c"
-	"src/cli/*.c"
-	"src/crypto/*.c"
-	"src/storage/*.c"
-)
+# file(GLOB SOURCES
+# 	"src/*.c"
+# 	"src/cli/*.c"
+# 	"src/crypto/*.c"
+# 	"src/storage/*.c"
+# )
+
+set(SOURCE src/passphrase.c)
 
 find_package(OpenSSL REQUIRED)
+
 if(OPENSSL_FOUND)
     set(OPENSSL_USE_STATIC_LIBS TRUE)
 endif()
 
-add_executable(pass ${SOURCES})
-target_link_libraries(pass OpenSSL::Crypto)
+add_executable(${PROJECT_NAME} ${SOURCE})
+target_link_libraries(${PROJECT_NAME} OpenSSL::Crypto)
 
 if(APPLE)
-	install(TARGETS pass DESTINATION /usr/local/bin)
+	install(TARGETS ${PROJECT_NAME} DESTINATION /usr/local/bin)
 elseif(UNIX)
-	install(TARGETS pass DESTINATION /usr/bin)
+	install(TARGETS ${PROJECT_NAME} DESTINATION /usr/bin)
 endif()
 
