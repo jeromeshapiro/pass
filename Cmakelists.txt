@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.8) 
 project(pass)
 
-include_directories(include)
 
 add_library(CLI src/cli.c)
 target_include_directories(CLI
@@ -12,7 +11,6 @@ target_include_directories(CLI
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-
 add_library(CRYPTO src/crypto.c)
 target_include_directories(CRYPTO
     PUBLIC 
@@ -21,7 +19,6 @@ target_include_directories(CRYPTO
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
-
 
 add_library(STORAGE src/storage.c)
 target_include_directories(STORAGE
@@ -32,12 +29,11 @@ target_include_directories(STORAGE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
+include_directories(include)
+
 
 find_package(OpenSSL REQUIRED)
 include_directories(${OPENSSL_INCLUDE_DIR})
-if(OPENSSL_FOUND)
-    set(OPENSSL_USE_STATIC_LIBS TRUE)
-endif()
 
 
 file(GLOB SOURCES "passphrase.c" "src/*.c")
