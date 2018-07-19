@@ -1,5 +1,8 @@
+#include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <cli.h>
+#include <passphrase.h>
 
 #define LS 1431206293
 #define CP 1431156757
@@ -47,6 +50,8 @@ int CLI_parse(int argc, char **argv)
 		return 0;
 	}
 
+	char *r;
+
 	switch(_hash(argv[1])) {
 		case LS:
 			printf("list passwords\n");
@@ -58,7 +63,7 @@ int CLI_parse(int argc, char **argv)
 			printf("print password to stdout\n");
 			break;
 		case CREATE:
-			printf("create new password\n");
+			printf("%s\n", PASSPHRASE_new_rand(24));
 			break;
 		case UPDATE:
 			if (!argv[2]) {

@@ -29,6 +29,15 @@ target_include_directories(STORAGE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
+add_library(PASSPHRASE src/passphrase.c)
+target_include_directories(PASSPHRASE
+    PUBLIC 
+        $<INSTALL_INTERFACE:src>    
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
 include_directories(src)
 
 
