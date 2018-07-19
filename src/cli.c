@@ -40,7 +40,8 @@ static void _print_usage() {
 	printf("%s", help);
 }
 
-int parse_command(int argc, char **argv) {
+int CLI_parse(int argc, char **argv)
+{
 	char *key = argv[2];
 
 	if (!argv[1]) {

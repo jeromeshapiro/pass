@@ -6,9 +6,9 @@
 #include <crypto.h>
 
 int main(int argc, char **argv) {
-	// initialize_storage();
+	STORAGE_initialize();
 
-	unsigned int r = rand_uint(0, 1000);
+	unsigned int r = CRYPTO_rand_uint(0, 1000);
 
-	return parse_command(argc, argv);
+	return CLI_parse(argc, argv);
 }

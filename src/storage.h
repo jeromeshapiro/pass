@@ -1,6 +1,6 @@
 #ifndef _STORAGE
 #define _STORAGE
 
-void initialize_storage();
+void STORAGE_initialize();
 
 #endif // _STORAGE

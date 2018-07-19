@@ -7,7 +7,8 @@ typedef union {
     unsigned char c[sizeof(unsigned int)];
 } _rand_uint;
 
-unsigned int rand_uint(unsigned int min, unsigned int max) {
+unsigned int CRYPTO_rand_uint(unsigned int min, unsigned int max)
+{
     _rand_uint byte;
 
     if (!RAND_bytes(byte.c, sizeof(byte.c))) {
