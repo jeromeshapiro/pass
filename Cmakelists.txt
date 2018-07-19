@@ -5,8 +5,8 @@ project(pass)
 add_library(CLI src/cli.c)
 target_include_directories(CLI
     PUBLIC 
-        $<INSTALL_INTERFACE:include>    
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:src>    
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
@@ -14,8 +14,8 @@ target_include_directories(CLI
 add_library(CRYPTO src/crypto.c)
 target_include_directories(CRYPTO
     PUBLIC 
-        $<INSTALL_INTERFACE:include>    
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:src>    
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
@@ -23,13 +23,13 @@ target_include_directories(CRYPTO
 add_library(STORAGE src/storage.c)
 target_include_directories(STORAGE
     PUBLIC 
-        $<INSTALL_INTERFACE:include>    
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:src>    
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-include_directories(include)
+include_directories(src)
 
 
 find_package(OpenSSL REQUIRED)

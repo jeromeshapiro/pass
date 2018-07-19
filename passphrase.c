@@ -8,7 +8,7 @@
 int main(int argc, char **argv) {
 	// initialize_storage();
 
-	unsigned int r = rand_uint(0, 10);
+	unsigned int r = rand_uint(0, 1000);
 
 	return parse_command(argc, argv);
 }
