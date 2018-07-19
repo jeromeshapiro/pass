@@ -12,7 +12,7 @@
 	},
 	"tasks": [{
 			"taskName": "cmake",
-			"args": ["cmake -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=Debug -DOPENSSL_ROOT_DIR=./ext/openssl/1.0.2o_1/include .."]
+			"args": ["cmake -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=Debug -DOPENSSL_ROOT_DIR=${workspaceRoot}/ext/openssl/1.0.2o_1/include .."]
 		},
 		{
 			"taskName": "make",
