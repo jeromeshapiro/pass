@@ -42,8 +42,6 @@ static void _print_usage() {
 
 int CLI_parse(int argc, char **argv)
 {
-	char *key = argv[2];
-
 	if (!argv[1]) {
 		_print_usage();
 		return 0;
@@ -65,10 +63,8 @@ int CLI_parse(int argc, char **argv)
 		case UPDATE:
 			if (!argv[2]) {
 				_print_usage();
-				return 1;
+				return 0;
 			}
-
-			key = argv[3];
 
 			switch (_hash(argv[2])) {
 				case USER:
@@ -82,7 +78,6 @@ int CLI_parse(int argc, char **argv)
 					return 1;
 					break;
 			}
-
 			break;
 		case RM:
 			printf("remove password\n");

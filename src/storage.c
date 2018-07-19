@@ -2,29 +2,40 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <pwd.h>
 
-#define HOME_DIR "/home/jeromeshapiro/pass"
-#define CONFIG_DIR "/.pass"
+#define CONFIG_DIR_NAME "/.pass"
 
 static struct stat st = {0};
+
 static FILE *auth;
 static FILE *passwords;
 
-void STORAGE_initialize()
-{
-	// char *username = getenv("USER");
-	// char *config_path = malloc(strlen(HOME_DIR) + strlen(username) + strlen(CONFIG_DIR) + 1);
-	// strcpy(config_path, HOME_DIR);
-    // strcat(config_path, username);
-	// strcat(config_path, CONFIG_DIR);
+char *_get_home_dir_path() {
+	struct passwd *user;
+	uid_t uid;
 
-	// const int dir_status = stat(HOME_DIR, &st);
+	uid = geteuid();
+	user = getpwuid(uid);
 
-	// if (dir_status == -1) {
-	// 	mkdir(HOME_DIR, 0700);
-	// }
+	return user->pw_dir;
+}
 
-	//free(config_path);
+void STORAGE_initialize() {
+	// Create storage directory if not exists
+	char *home_dir_path = _get_home_dir_path();
+	char *config_path = malloc(strlen(home_dir_path) + strlen(CONFIG_DIR_NAME) + 1);
+	strcpy(config_path, home_dir_path);
+	strcat(config_path, CONFIG_DIR_NAME);
+
+	const int dir_status = stat(config_path, &st);
+
+	if (dir_status == -1) {
+		mkdir(config_path, 0600);
+	}
+
+	free(config_path);
 }
