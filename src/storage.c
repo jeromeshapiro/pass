@@ -14,10 +14,10 @@ static FILE *passwords;
 
 void initialize_storage() {
 	char *username = getenv("USER");
-	// char *config_path = malloc(strlen(HOME_DIR) + strlen(username) + strlen(CONFIG_DIR) + 1);
-	// strcpy(config_path, HOME_DIR);
-    // strcat(config_path, username);
-	// strcat(config_path, CONFIG_DIR);
+	char *config_path = malloc(strlen(HOME_DIR) + strlen(username) + strlen(CONFIG_DIR) + 1);
+	strcpy(config_path, HOME_DIR);
+    strcat(config_path, username);
+	strcat(config_path, CONFIG_DIR);
 
 	const int dir_status = stat(HOME_DIR, &st);
 
