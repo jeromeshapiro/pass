@@ -1,6 +1,6 @@
+#include <crypto.h>
 #include <stdio.h>
 #include <openssl/rand.h>
-#include "rand.h"
 
 typedef union {
     unsigned int uint;
