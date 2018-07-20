@@ -29,7 +29,9 @@ unsigned int CRYPTO_rand_uint(const unsigned int min, const unsigned int max) {
 char *CRYPTO_rand_chars(const int len) {
     char *pass = malloc((sizeof(char) * len) + 1);
 
-    for (int i = 0; i < (len - 1); i++) {
+    int i;
+
+    for (i = 0; i < (len - 1); i++) {
         unsigned int set = CRYPTO_rand_uint(0, 2);
         char c;
 
@@ -48,7 +50,7 @@ char *CRYPTO_rand_chars(const int len) {
         pass[i] = c;
     }
 
-    pass[len + 1] = '\0';
+    pass[i] = '\0';
 
     return pass;
 }
