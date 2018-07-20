@@ -10,6 +10,8 @@
 #define MIN_LOWER 97
 #define MAX_LOWER 122
 
+unsigned int seed = 0;
+
 typedef union {
     unsigned int uint;
     unsigned char c[sizeof(unsigned int)];
@@ -18,12 +20,16 @@ typedef union {
 unsigned int CRYPTO_rand_uint(const unsigned int min, const unsigned int max) {
     _rand byte;
 
+    RAND_seed(&seed, sizeof(seed));
+
     if (!RAND_bytes(byte.c, sizeof(byte.c))) {
         fprintf(stderr, "Can't get random bytes!\n");
         exit(1);
     }
 
-    return byte.uint % (max + 1 - min) + min;
+    seed = byte.uint;
+
+    return seed % (max + 1 - min) + min;
 }
 
 char *CRYPTO_rand_chars(const int len) {
@@ -37,13 +43,13 @@ char *CRYPTO_rand_chars(const int len) {
 
         switch(set) {
             case 0:
-                c = CRYPTO_rand_uint(MIN_SYMBOL, MAX_SYMBOL);
-                break;
-            case 1:
                 c = CRYPTO_rand_uint(MIN_LOWER, MAX_LOWER);
                 break;
-            case 2:
+            case 1:
                 c = CRYPTO_rand_uint(MIN_UPPER, MAX_UPPER);
+                break;
+            case 2:
+                c = CRYPTO_rand_uint(MIN_SYMBOL, MAX_SYMBOL);
                 break;
         }
 
