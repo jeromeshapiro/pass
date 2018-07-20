@@ -14,7 +14,8 @@ static char *config_path;
 static FILE *auth;
 static FILE *passwords;
 
-char *_get_home_dir_path() {
+char *_get_home_dir_path()
+{
 	struct passwd *user;
 	uid_t uid;
 
@@ -24,7 +25,8 @@ char *_get_home_dir_path() {
 	return user->pw_dir;
 }
 
-void STORAGE_initialize() {
+void STORAGE_initialize()
+{
 	// Create storage directory if not exists
 	char *home_dir_path = _get_home_dir_path();
 	

@@ -38,6 +38,15 @@ target_include_directories(PASSPHRASE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
+add_library(MEM src/mem.c)
+target_include_directories(MEM
+    PUBLIC 
+        $<INSTALL_INTERFACE:src>    
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
 include_directories(src)
 
 
