@@ -4,6 +4,7 @@
 #include <cli.h>
 #include <passphrase.h>
 #include <mem.h>
+#include <storage.h>
 
 #define LS 1431206293
 #define CP 1431156757
@@ -46,6 +47,60 @@ static void _print_usage()
 	printf("%s", help);
 }
 
+// List all passphrase keys
+static int _list_passphrases()
+{
+	printf("list passwords\n");
+	return 0;
+}
+
+// Copy a passphrase to the clipboard
+static int _copy_passphrase()
+{
+	printf("copy password to clipboard\n");
+	return 0;
+}
+
+// Print a passphrase to stdout
+static int _print_passphrase()
+{
+	printf("print password to stdout\n");
+	return 0;
+}
+
+// Create a new passphrase
+static int _create_passphrase(char *key, int length)
+{
+	char *passphrase;
+	passphrase = PASSPHRASE_new_rand(length);
+
+	STORAGE_save_passphrase(key, passphrase);
+
+	MEM_free_buff(passphrase, sizeof(passphrase));
+
+	return 0;
+}
+
+static int _update_user()
+{
+	printf("update user\n");
+	return 0;
+}
+
+// Update an existing passphrase
+static int _update_password()
+{
+	printf("update password\n");
+	return 0;
+}
+
+// Delete a passphrase
+static int _remove_password()
+{
+	printf("remove password\n");
+	return 0;
+}
+
 int CLI_parse(int argc, char **argv)
 {
 	if (!argv[1])
@@ -54,26 +109,30 @@ int CLI_parse(int argc, char **argv)
 		return 0;
 	}
 
-	char *passphrase;
-
 	switch(_hash(argv[1]))
 	{
 	case LS:
-		printf("list passwords\n");
+		return _list_passphrases();
 		break;
 	case CP:
-		printf("copy password to clipboard\n");
+		return _copy_passphrase();
 		break;
 	case PRINT:
-		printf("print password to stdout\n");
+		return _print_passphrase();
 		break;
 	case CREATE:
-		passphrase = PASSPHRASE_new_rand(24);
-		printf("%s\n", passphrase);
-		MEM_free_buff(passphrase, sizeof(passphrase));
+		// Must specify passphrase key
+		if (!argv[2])
+		{
+			_print_usage();
+			return 0;
+		}
+
+		return _create_passphrase(argv[2], 24);
 		break;
 	case UPDATE:
-		if (!argv[2]) {
+		if (!argv[2])
+		{
 			_print_usage();
 			return 0;
 		}
@@ -81,10 +140,10 @@ int CLI_parse(int argc, char **argv)
 		switch (_hash(argv[2]))
 		{
 		case USER:
-			printf("update user\n");
+			return _update_user();
 			break;
 		case PASSWORD:
-			printf("update password\n");
+			return _update_password();
 			break;
 		default:
 			printf("unrecognised update command!\n");
@@ -93,13 +152,12 @@ int CLI_parse(int argc, char **argv)
 		}
 		break;
 	case RM:
-		printf("remove password\n");
+		return _remove_password();
 		break;
 	default:
 		printf("unrecognized command!\n");
+		return 1;
 		break;
 	}
-
-	return 0;
 }
 

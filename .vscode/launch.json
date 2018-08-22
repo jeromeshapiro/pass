@@ -17,7 +17,7 @@
 				"trace": false
 			},
 			"showDisplayString": false,
-			"args": ["create"],
+			"args": ["create", "bar"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceRoot}",
 			"environment": [],
