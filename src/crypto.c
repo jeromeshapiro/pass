@@ -12,32 +12,26 @@
 
 unsigned int seed = 0;
 
-typedef union
-{
+typedef union {
     unsigned int uint;
     unsigned char c[sizeof(unsigned int)];
 } _rand;
 
-unsigned int CRYPTO_rand_byte()
-{
+unsigned int CRYPTO_rand_byte() {
     _rand byte;
 
     RAND_seed(&seed, sizeof(seed));
 
-    if (!RAND_bytes(byte.c, sizeof(byte.c)))
-    {
+    if (!RAND_bytes(byte.c, sizeof(byte.c))) {
         fprintf(stderr, "Can't get random bytes!\n");
         exit(1);
     }
 
     seed = byte.uint;
-
     return seed;
 }
 
-unsigned int CRYPTO_rand_uint(const unsigned int min, const unsigned int max)
-{
+unsigned int CRYPTO_rand_uint(const unsigned int min, const unsigned int max) {
     seed = CRYPTO_rand_byte();
-
     return seed % (max + 1 - min) + min;
 }

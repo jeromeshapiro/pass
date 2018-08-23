@@ -14,36 +14,32 @@
 #define MIN_SYMBOL_ASCII 33
 #define MAX_SYMBOL_ASCII 47
 
-enum charsets
-{
+enum charsets {
 	LOWER_CHARSET = (1 << 0),
 	UPPER_CHARSET = (1 << 1),
 	SYMBOL_CHARSET = (1 << 2)
 };
 
-char *PASSPHRASE_new_rand(const short len)
-{
+char *PASSPHRASE_new_rand(const short len) {
 	const int buffer_size = sizeof(char) * len;
 	char *buffer = MEM_alloc_buff(buffer_size);
 
 	int i;
 
-	for (i = 0; i < (len - 1); i++)
-	{
+	for (i = 0; i < (len - 1); i++) {
 		unsigned int set = CRYPTO_rand_uint(0, 2);
 		char c;
 
-		switch (set)
-		{
-		case 0:
-			c = CRYPTO_rand_uint(MIN_LOWER_ASCII, MAX_LOWER_ASCII);
-			break;
-		case 1:
-			c = CRYPTO_rand_uint(MIN_UPPER_ASCII, MAX_UPPER_ASCII);
-			break;
-		case 2:
-			c = CRYPTO_rand_uint(MIN_SYMBOL_ASCII, MAX_SYMBOL_ASCII);
-			break;
+		switch (set) {
+			case 0:
+				c = CRYPTO_rand_uint(MIN_LOWER_ASCII, MAX_LOWER_ASCII);
+				break;
+			case 1:
+				c = CRYPTO_rand_uint(MIN_UPPER_ASCII, MAX_UPPER_ASCII);
+				break;
+			case 2:
+				c = CRYPTO_rand_uint(MIN_SYMBOL_ASCII, MAX_SYMBOL_ASCII);
+				break;
 		}
 
 		buffer[i] = c;
