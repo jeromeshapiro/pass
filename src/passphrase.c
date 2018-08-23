@@ -27,7 +27,7 @@ char *PASSPHRASE_new_rand(const short len) {
 	int i;
 
 	for (i = 0; i < (len - 1); i++) {
-		unsigned int set = CRYPTO_rand_uint(0, 2);
+		const unsigned int set = CRYPTO_rand_uint(0, 2);
 		char c;
 
 		switch (set) {

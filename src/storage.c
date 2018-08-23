@@ -28,7 +28,7 @@ char *_get_home_dir_path() {
 
 void STORAGE_initialize() {
 	// Create storage directory if not exists
-	char *home_dir_path = _get_home_dir_path();
+	const char *home_dir_path = _get_home_dir_path();
 	
 	// Assign config_path
 	config_path = malloc(strlen(home_dir_path) + strlen(CONFIG_DIR_NAME) + 1);

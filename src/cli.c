@@ -65,8 +65,7 @@ static int _print_passphrase() {
 
 // Create a new passphrase
 static int _create_passphrase(char *key, int length) {
-	char *passphrase;
-	passphrase = PASSPHRASE_new_rand(length);
+	char *passphrase = PASSPHRASE_new_rand(length);
 
 	STORAGE_save_passphrase(key, passphrase);
 
