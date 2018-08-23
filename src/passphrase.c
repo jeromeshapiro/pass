@@ -21,28 +21,24 @@ enum charsets {
 };
 
 char *PASSPHRASE_new_rand(const short len) {
-	const int buffer_size = sizeof(char) * len;
-	char *buffer = MEM_alloc_buff(buffer_size);
-
+	char *buffer = MEM_alloc_buff(sizeof(char) * len);
 	int i;
 
 	for (i = 0; i < (len - 1); i++) {
-		const unsigned int set = CRYPTO_rand_uint(0, 2);
-		char c;
+		const unsigned int charset = CRYPTO_rand_uint(0, 2);
+		char character;
 
-		switch (set) {
+		switch (charset) {
 			case 0:
-				c = CRYPTO_rand_uint(MIN_LOWER_ASCII, MAX_LOWER_ASCII);
+				buffer[i] = CRYPTO_rand_uint(MIN_LOWER_ASCII, MAX_LOWER_ASCII);
 				break;
 			case 1:
-				c = CRYPTO_rand_uint(MIN_UPPER_ASCII, MAX_UPPER_ASCII);
+				buffer[i] = CRYPTO_rand_uint(MIN_UPPER_ASCII, MAX_UPPER_ASCII);
 				break;
 			case 2:
-				c = CRYPTO_rand_uint(MIN_SYMBOL_ASCII, MAX_SYMBOL_ASCII);
+				buffer[i] = CRYPTO_rand_uint(MIN_SYMBOL_ASCII, MAX_SYMBOL_ASCII);
 				break;
 		}
-
-		buffer[i] = c;
 	}
 
 	buffer[i] = '\0';
